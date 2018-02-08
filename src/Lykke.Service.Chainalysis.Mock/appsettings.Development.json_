@@ -1,0 +1,13 @@
+﻿{
+  "Chainalysis_MockService": {
+    "Db": {
+      "LogsConnString": "UseDevelopmentStorage=true"
+    }
+  },
+  "SlackNotifications": {
+    "AzureQueue": {
+      "ConnectionString": "UseDevelopmentStorage=true",
+      "QueueName": "slack-notifications"
+    }
+  }
+}
