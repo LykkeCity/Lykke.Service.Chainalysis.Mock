@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Lykke.Service.Chainalysis_Mock.Models
+namespace Lykke.Service.ChainalysisMock.Models
 {
     public class IsAliveResponse
     {

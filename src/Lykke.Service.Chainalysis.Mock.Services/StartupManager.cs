@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Common.Log;
-using Lykke.Service.Chainalysis_Mock.Core.Services;
+using Lykke.Service.ChainalysisMock.Core.Services;
 
-namespace Lykke.Service.Chainalysis_Mock.Services
+namespace Lykke.Service.ChainalysisMock.Services
 {
     // NOTE: Sometimes, startup process which is expressed explicitly is not just better, 
     // but the only way. If this is your case, use this class to manage startup.

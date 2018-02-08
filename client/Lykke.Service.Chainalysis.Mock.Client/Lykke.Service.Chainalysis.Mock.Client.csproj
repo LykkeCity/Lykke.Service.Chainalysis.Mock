@@ -13,6 +13,8 @@
     <RepositoryUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysis_Mock.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Lykke</PackageTags>
+    <AssemblyName>Lykke.Service.ChainalysisMock.Client</AssemblyName>
+    <RootNamespace>Lykke.Service.ChainalysisMock.Client</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

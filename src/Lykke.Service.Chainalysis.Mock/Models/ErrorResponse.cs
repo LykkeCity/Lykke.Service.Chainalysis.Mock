@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Lykke.Service.Chainalysis_Mock.Models
+namespace Lykke.Service.ChainalysisMock.Models
 {
     public class ErrorResponse
     {

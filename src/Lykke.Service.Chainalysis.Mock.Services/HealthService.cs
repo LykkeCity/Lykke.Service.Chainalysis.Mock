@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Lykke.Service.Chainalysis_Mock.Core.Domain.Health;
-using Lykke.Service.Chainalysis_Mock.Core.Services;
+using Lykke.Service.ChainalysisMock.Core.Domain.Health;
+using Lykke.Service.ChainalysisMock.Core.Services;
 
-namespace Lykke.Service.Chainalysis_Mock.Services
+namespace Lykke.Service.ChainalysisMock.Services
 {
     // NOTE: See https://lykkex.atlassian.net/wiki/spaces/LKEWALLET/pages/35755585/Add+your+app+to+Monitoring
     public class HealthService : IHealthService

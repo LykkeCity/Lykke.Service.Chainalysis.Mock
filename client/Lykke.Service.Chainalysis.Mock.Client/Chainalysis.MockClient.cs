@@ -1,13 +1,13 @@
 ﻿using System;
 using Common.Log;
 
-namespace Lykke.Service.Chainalysis_Mock.Client
+namespace Lykke.Service.ChainalysisMock.Client
 {
-    public class Chainalysis_MockClient : IChainalysis_MockClient, IDisposable
+    public class ChainalysisMockClient : IChainalysisMockClient, IDisposable
     {
         private readonly ILog _log;
 
-        public Chainalysis_MockClient(string serviceUrl, ILog log)
+        public ChainalysisMockClient(string serviceUrl, ILog log)
         {
             _log = log;
         }

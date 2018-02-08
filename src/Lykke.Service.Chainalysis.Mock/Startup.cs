@@ -7,18 +7,17 @@ using Common.Log;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
-using Lykke.Service.Chainalysis_Mock.Core.Services;
-using Lykke.Service.Chainalysis_Mock.Core.Settings;
-using Lykke.Service.Chainalysis_Mock.Modules;
+using Lykke.Service.ChainalysisMock.Core.Services;
+using Lykke.Service.ChainalysisMock.Core.Settings;
+using Lykke.Service.ChainalysisMock.Modules;
 using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lykke.Service.Chainalysis_Mock
+namespace Lykke.Service.ChainalysisMock
 {
     public class Startup
     {
@@ -58,7 +57,7 @@ namespace Lykke.Service.Chainalysis_Mock
 
                 Log = CreateLogWithSlack(services, appSettings);
 
-                builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.Chainalysis_MockService), Log));
+                builder.RegisterModule(new ServiceModule(appSettings.Nested(x => x.ChainalysisMockService), Log));
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
 
@@ -172,7 +171,7 @@ namespace Lykke.Service.Chainalysis_Mock
 
             aggregateLogger.AddLog(consoleLogger);
 
-            var dbLogConnectionStringManager = settings.Nested(x => x.Chainalysis_MockService.Db.LogsConnString);
+            var dbLogConnectionStringManager = settings.Nested(x => x.ChainalysisMockService.Db.LogsConnString);
             var dbLogConnectionString = dbLogConnectionStringManager.CurrentValue;
 
             if (string.IsNullOrEmpty(dbLogConnectionString))

@@ -1,4 +1,4 @@
-﻿namespace Lykke.Service.Chainalysis_Mock.Client
+﻿namespace Lykke.Service.ChainalysisMock.Client
 {
     public static class AutorestClientMapper
     {

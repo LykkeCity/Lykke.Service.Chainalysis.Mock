@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace Lykke.Service.Chainalysis_Mock.Tests
+namespace Lykke.Service.ChainalysisMock.Tests
 {
     public class UnitTest1
     {

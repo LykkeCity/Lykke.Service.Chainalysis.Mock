@@ -1,7 +1,7 @@
-
-namespace Lykke.Service.Chainalysis_Mock.Client
+﻿
+namespace Lykke.Service.ChainalysisMock.Client
 {
-    public interface IChainalysis_MockClient
+    public interface IChainalysisMockClient
     {
     }
 }

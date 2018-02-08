@@ -1,22 +1,22 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Log;
-using Lykke.Service.Chainalysis_Mock.Core.Services;
-using Lykke.Service.Chainalysis_Mock.Core.Settings.ServiceSettings;
-using Lykke.Service.Chainalysis_Mock.Services;
+using Lykke.Service.ChainalysisMock.Core.Services;
+using Lykke.Service.ChainalysisMock.Core.Settings.ServiceSettings;
+using Lykke.Service.ChainalysisMock.Services;
 using Lykke.SettingsReader;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Lykke.Service.Chainalysis_Mock.Modules
+namespace Lykke.Service.ChainalysisMock.Modules
 {
     public class ServiceModule : Module
     {
-        private readonly IReloadingManager<Chainalysis_MockSettings> _settings;
+        private readonly IReloadingManager<ChainalysisMockSettings> _settings;
         private readonly ILog _log;
         // NOTE: you can remove it if you don't need to use IServiceCollection extensions to register service specific dependencies
         private readonly IServiceCollection _services;
 
-        public ServiceModule(IReloadingManager<Chainalysis_MockSettings> settings, ILog log)
+        public ServiceModule(IReloadingManager<ChainalysisMockSettings> settings, ILog log)
         {
             _settings = settings;
             _log = log;

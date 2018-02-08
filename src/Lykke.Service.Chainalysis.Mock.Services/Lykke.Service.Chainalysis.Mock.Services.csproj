@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>Lykke.Service.Chainalysis_Mock.Services</AssemblyName>
-    <RootNamespace>Lykke.Service.Chainalysis_Mock.Services</RootNamespace>
+    <AssemblyName>Lykke.Service.ChainalysisMock.Services</AssemblyName>
+    <RootNamespace>Lykke.Service.ChainalysisMock.Services</RootNamespace>
     <Version>1.0.0</Version>
   </PropertyGroup>
 
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.Service.Chainalysis_Mock.Core\Lykke.Service.Chainalysis_Mock.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Core\Lykke.Service.Chainalysis.Mock.Core.csproj" />
   </ItemGroup>
 
 </Project>

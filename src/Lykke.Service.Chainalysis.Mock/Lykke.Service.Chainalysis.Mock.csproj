@@ -4,8 +4,8 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <Version>1.0.1</Version>
-    <AssemblyName>Lykke.Service.Chainalysis_Mock</AssemblyName>
-    <RootNamespace>Lykke.Service.Chainalysis_Mock</RootNamespace>
+    <AssemblyName>Lykke.Service.ChainalysisMock</AssemblyName>
+    <RootNamespace>Lykke.Service.ChainalysisMock</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -53,9 +53,9 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Lykke.Service.Chainalysis_Mock.AzureRepositories\Lykke.Service.Chainalysis_Mock.AzureRepositories.csproj" />
-    <ProjectReference Include="..\Lykke.Service.Chainalysis_Mock.Core\Lykke.Service.Chainalysis_Mock.Core.csproj" />
-    <ProjectReference Include="..\Lykke.Service.Chainalysis_Mock.Services\Lykke.Service.Chainalysis_Mock.Services.csproj" />
+    <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.AzureRepositories\Lykke.Service.Chainalysis.Mock.AzureRepositories.csproj" />
+    <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Core\Lykke.Service.Chainalysis.Mock.Core.csproj" />
+    <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Services\Lykke.Service.Chainalysis.Mock.Services.csproj" />
   </ItemGroup>
 
   <Target Name="PrepublishScript" BeforeTargets="PrepareForPublish">
