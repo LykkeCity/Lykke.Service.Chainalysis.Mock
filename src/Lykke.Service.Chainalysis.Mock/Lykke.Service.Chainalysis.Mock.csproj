@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\Lykke.Service.Chainalysis_Mock.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Lykke.Service.ChainalysisMock.xml</DocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -53,6 +53,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\..\Lykke.Service.Chainalysis.Mock.Contracts\Lykke.Service.Chainalysis.Mock.Contracts.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.AzureRepositories\Lykke.Service.Chainalysis.Mock.AzureRepositories.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Core\Lykke.Service.Chainalysis.Mock.Core.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Services\Lykke.Service.Chainalysis.Mock.Services.csproj" />

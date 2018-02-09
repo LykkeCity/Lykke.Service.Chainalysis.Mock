@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -14,8 +16,10 @@ using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 
 namespace Lykke.Service.ChainalysisMock
 {
@@ -44,13 +48,20 @@ namespace Lykke.Service.ChainalysisMock
                     .AddJsonOptions(options =>
                     {
                         options.SerializerSettings.ContractResolver =
-                            new Newtonsoft.Json.Serialization.DefaultContractResolver();
+                            new Newtonsoft.Json.Serialization.DefaultContractResolver()
+                            {
+                                NamingStrategy = new CamelCaseNamingStrategy()
+                            };
                     });
 
                 services.AddSwaggerGen(options =>
                 {
-                    options.DefaultLykkeConfiguration("v1", "Chainalysis_Mock API");
+                    options.DefaultLykkeConfiguration("v1", "Chainalysis Risk API");
+                    options.IncludeXmlComments(Path.ChangeExtension(Assembly.GetEntryAssembly().Location, "xml"));
+                    options.OperationFilter<CustomResponseType>();
                 });
+
+
 
                 var builder = new ContainerBuilder();
                 var appSettings = Configuration.LoadSettings<AppSettings>();
@@ -80,7 +91,10 @@ namespace Lykke.Service.ChainalysisMock
                 }
 
                 app.UseLykkeForwardedHeaders();
-                app.UseLykkeMiddleware("Chainalysis_Mock", ex => new { Message = "Technical problem" });
+                app.UseLykkeMiddleware("Chainalysis_Mock", ex => new
+                {
+                    Message = "Technical problem"
+                });
 
                 app.UseMvc();
                 app.UseSwagger(c =>
@@ -91,6 +105,7 @@ namespace Lykke.Service.ChainalysisMock
                 {
                     x.RoutePrefix = "swagger/ui";
                     x.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+
                 });
                 app.UseStaticFiles();
 
@@ -176,23 +191,26 @@ namespace Lykke.Service.ChainalysisMock
 
             if (string.IsNullOrEmpty(dbLogConnectionString))
             {
-                consoleLogger.WriteWarningAsync(nameof(Startup), nameof(CreateLogWithSlack), "Table loggger is not inited").Wait();
+                consoleLogger.WriteWarningAsync(nameof(Startup), nameof(CreateLogWithSlack),
+                    "Table loggger is not inited").Wait();
                 return aggregateLogger;
             }
 
             if (dbLogConnectionString.StartsWith("${") && dbLogConnectionString.EndsWith("}"))
-                throw new InvalidOperationException($"LogsConnString {dbLogConnectionString} is not filled in settings");
+                throw new InvalidOperationException(
+                    $"LogsConnString {dbLogConnectionString} is not filled in settings");
 
             var persistenceManager = new LykkeLogToAzureStoragePersistenceManager(
-                AzureTableStorage<LogEntity>.Create(dbLogConnectionStringManager, "Chainalysis_MockLog", consoleLogger),
+                AzureTableStorage<LogEntity>.Create(dbLogConnectionStringManager, "ChainalysisMockLog", consoleLogger),
                 consoleLogger);
 
             // Creating slack notification service, which logs own azure queue processing messages to aggregate log
-            var slackService = services.UseSlackNotificationsSenderViaAzureQueue(new AzureQueueIntegration.AzureQueueSettings
-            {
-                ConnectionString = settings.CurrentValue.SlackNotifications.AzureQueue.ConnectionString,
-                QueueName = settings.CurrentValue.SlackNotifications.AzureQueue.QueueName
-            }, aggregateLogger);
+            var slackService = services.UseSlackNotificationsSenderViaAzureQueue(
+                new AzureQueueIntegration.AzureQueueSettings
+                {
+                    ConnectionString = settings.CurrentValue.SlackNotifications.AzureQueue.ConnectionString,
+                    QueueName = settings.CurrentValue.SlackNotifications.AzureQueue.QueueName
+                }, aggregateLogger);
 
             var slackNotificationsManager = new LykkeLogToAzureSlackNotificationsManager(slackService, consoleLogger);
 
@@ -208,5 +226,7 @@ namespace Lykke.Service.ChainalysisMock
 
             return aggregateLogger;
         }
+
+
     }
 }

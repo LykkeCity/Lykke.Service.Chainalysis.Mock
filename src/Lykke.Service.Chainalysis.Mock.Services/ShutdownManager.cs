@@ -8,7 +8,7 @@ namespace Lykke.Service.ChainalysisMock.Services
     // If this is your case, use this class to manage shutdown.
     // For example, sometimes some state should be saved only after all incoming message processing and 
     // all periodical handler was stopped, and so on.
-    
+
     public class ShutdownManager : IShutdownManager
     {
         private readonly ILog _log;
@@ -20,8 +20,7 @@ namespace Lykke.Service.ChainalysisMock.Services
 
         public async Task StopAsync()
         {
-            // TODO: Implement your shutdown logic here. Good idea is to log every step
-
+            await _log.WriteInfoAsync("Lykke.Service.ChainalysisMock", "Service Stoped", "");
             await Task.CompletedTask;
         }
     }
