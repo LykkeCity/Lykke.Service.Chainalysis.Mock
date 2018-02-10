@@ -12,6 +12,9 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <remarks>
+        /// List deposit addresses associated with a user.
+        /// </remarks>
         /// <param name="userId">The ID of the user</param>
         /// <param name="limit">The maximum number of items to return.</param>
         /// <param name="offset">The offset into the result set</param>
@@ -27,6 +30,12 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <remarks>
+        /// <p>Add a deposit address associated with a user.</p>
+        ///<p><strong>Note</strong>: The user is automatically created if it does not exist.</p>
+        ///<p><strong>Note</strong>: The function is idempotent: If the deposit address is already associated with the user the function succeeds.</p>
+        ///<p><strong>Note</strong>: If the deposit address is associated with a different user the function fails (see Response Messages below).</p>
+        /// </remarks>
         /// <param name="userId">The ID of the user</param>
         /// <param name="depositeAddress">The deposit address</param>
         /// <returns></returns>
@@ -42,6 +51,9 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         /// <summary>
         /// 
         /// </summary>
+        /// <remarks>
+        /// Delete a deposit address associated with a user.
+        /// </remarks>
         /// <param name="userId">The ID of the user</param>
         /// <param name="address">The address to delete</param>
         /// <returns></returns>
