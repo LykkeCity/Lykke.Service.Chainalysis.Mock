@@ -10,7 +10,7 @@ namespace Lykke.Service.ChainalysisMock.Core.Domain
         int LastActivity { get; set; }
         string Score { get; set; }
         int ScoreUpdatedDate { get; set; }
-        List<UserExplosureDetails> ExposureDetails { get; set; }
+        List<IUserExplosureDetails> ExposureDetails { get; set; }
 
     }
 }

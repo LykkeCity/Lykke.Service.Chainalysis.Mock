@@ -1,6 +1,6 @@
 ﻿namespace Lykke.Service.ChainalysisMock.Core.Domain
 {
-    public interface IWindrowAddressInfo : IAddressInfo
+    public interface IWithdrawAddressInfo : IAddressInfo
     {
         string Name { get; set; }
 

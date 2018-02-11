@@ -38,7 +38,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         /// <returns></returns>
         [HttpGet("/user/{userId}/addresses/withdrawal")]
         [SwaggerOperation(Tags = new[] { "Withdrawal Address Management" })]
-        [SwaggerResponse(200, typeof(IUserWindrowAddressInfo), "Successful response")]
+        [SwaggerResponse(200, typeof(IUserWithdrawAddressInfo), "Successful response")]
         public async Task<ActionResult> GetAddressWithdrawal(string userId, int? limit, int? offset)
         {
             return Ok(await _chainalysisMockService.GetUserWithdrawAsync(Token, userId, limit, offset));
@@ -69,7 +69,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         /// <returns></returns>
         [HttpPost("/user/{userId}/addresses/withdrawal")]
         [SwaggerOperation(Tags = new[] { "Withdrawal Address Management" })]
-        [SwaggerResponse(200, typeof(IWindrowAddressInfo), "Successful response")]
+        [SwaggerResponse(200, typeof(IWithdrawAddressInfo), "Successful response")]
         public async Task<ActionResult> AddAddressWithdrawals(string userId, [FromBody] AddressImportModel withdrawalAddress)
         {
             return Ok(await _chainalysisMockService.AddAddressWithdrawAsync(Token, userId, Mapper.Map<AddressImport>(withdrawalAddress)));

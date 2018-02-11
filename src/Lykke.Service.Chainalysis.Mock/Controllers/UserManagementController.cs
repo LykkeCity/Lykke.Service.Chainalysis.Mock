@@ -159,9 +159,10 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(object), "Successful response")]
         public async Task<ActionResult> UpdateUserComments(string userId, [FromBody] CommentModel comment)
         {
-            await _chainalysisMockService.UpdateUserCommentAsync(Token, Mapper.Map<UserComment>(comment));
+            await _chainalysisMockService.UpdateUserCommentAsync(Token, userId, Mapper.Map<UserComment>(comment));
             return Ok();
         }
 
     }
 }
+
