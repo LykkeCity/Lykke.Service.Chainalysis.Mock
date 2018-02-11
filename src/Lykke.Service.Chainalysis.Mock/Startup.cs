@@ -59,6 +59,7 @@ namespace Lykke.Service.ChainalysisMock
                     options.DefaultLykkeConfiguration("v1", "Chainalysis Risk API");
                     options.IncludeXmlComments(Path.ChangeExtension(Assembly.GetEntryAssembly().Location, "xml"));
                     options.OperationFilter<CustomResponseType>();
+
                 });
 
 

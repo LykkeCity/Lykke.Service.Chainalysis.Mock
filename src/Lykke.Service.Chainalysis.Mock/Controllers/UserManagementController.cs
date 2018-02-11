@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Lykke.Service.Chainalysis.Mock.Contracts;
 using Lykke.Service.ChainalysisMock.Core.Domain;
 using Microsoft.AspNetCore.Mvc;
