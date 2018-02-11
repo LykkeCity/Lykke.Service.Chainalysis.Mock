@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Lykke.Service.Chainalysis.Mock.Contracts;
 using Lykke.Service.ChainalysisMock.Core.Domain;
+using Lykke.Service.ChainalysisMock.Core.Services;
+using Lykke.Service.ChainalysisMock.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -9,6 +12,15 @@ namespace Lykke.Service.ChainalysisMock.Controllers
     [Route("api/withdrawalAddressManagement")]
     public class WithdrawalAddressManagementController : BaseController
     {
+
+        private readonly IChainalysisMockService _chainalysisMockService;
+
+        public WithdrawalAddressManagementController(IChainalysisMockService chainalysisMockService)
+        {
+            _chainalysisMockService = chainalysisMockService;
+        }
+
+
         /// <summary>
         /// </summary>
         /// <remarks>
@@ -29,7 +41,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(IUserWindrowAddressInfo), "Successful response")]
         public async Task<ActionResult> GetAddressWithdrawal(string userId, int? limit, int? offset)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.GetUserWithdrawAsync(Token, userId, limit, offset));
         }
 
         /// <summary>
@@ -60,7 +72,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(IWindrowAddressInfo), "Successful response")]
         public async Task<ActionResult> AddAddressWithdrawals(string userId, [FromBody] AddressImportModel withdrawalAddress)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.AddAddressWithdrawAsync(Token, userId, Mapper.Map<AddressImport>(withdrawalAddress)));
         }
 
         /// <summary>
@@ -77,7 +89,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(object), "Successful response")]
         public async Task<ActionResult> DeleteAddressWithdrawal(string userId, string address)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.DeleteWithdrawalAsync(Token, userId, address));
         }
     }
 

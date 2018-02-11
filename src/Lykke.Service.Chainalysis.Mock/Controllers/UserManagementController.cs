@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using AutoMapper;
 using Lykke.Service.Chainalysis.Mock.Contracts;
 using Lykke.Service.ChainalysisMock.Core.Domain;
+using Lykke.Service.ChainalysisMock.Core.Services;
+using Lykke.Service.ChainalysisMock.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using RiskScore = Lykke.Service.Chainalysis.Mock.Contracts.RiskScore;
@@ -15,6 +18,12 @@ namespace Lykke.Service.ChainalysisMock.Controllers
     [SwaggerOperationFilter(typeof(CustomResponseType))]
     public class UserManagementController : BaseController
     {
+        private readonly IChainalysisMockService _chainalysisMockService;
+
+        public UserManagementController(IChainalysisMockService chainalysisMockService)
+        {
+            _chainalysisMockService = chainalysisMockService;
+        }
 
         /// <summary>
         /// </summary>
@@ -44,7 +53,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(IUserInfo), "Successful response")]
         public async Task<ActionResult> GetUsers(int? maxIdleDays, RiskScore? score, int? limit, int? offset)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.GetUsersAsync(Token, maxIdleDays, Mapper.Map<Core.Domain.RiskScore?>(score), limit, offset));
         }
 
         /// <summary>
@@ -86,6 +95,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(409, typeof(string), "Conflict: The address is associated with another user. This could be another user in a different organization. If this occurs either this request, or the request that did the original registration is in error. If the deposit address was registered in another organization than yours please contact support@chainalysis.com")]
         public async Task<ActionResult> ImportUser([FromBody] UserImportModel userImport)
         {
+            await _chainalysisMockService.ImportUserAsync(Token, Mapper.Map<UserImport>(userImport));
             return Ok();
         }
 
@@ -131,7 +141,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200,typeof(IUserDetails), "Successful response")]
         public async Task<ActionResult> GetUser(string userId)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.GetUserAsync(Token, userId));
         }
 
         /// <summary>
@@ -149,6 +159,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(object), "Successful response")]
         public async Task<ActionResult> UpdateUserComments(string userId, [FromBody] CommentModel comment)
         {
+            await _chainalysisMockService.UpdateUserCommentAsync(Token, Mapper.Map<UserComment>(comment));
             return Ok();
         }
 

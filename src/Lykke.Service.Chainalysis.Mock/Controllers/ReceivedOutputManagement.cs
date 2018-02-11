@@ -1,14 +1,27 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Lykke.Service.Chainalysis.Mock.Contracts;
 using Lykke.Service.ChainalysisMock.Core.Domain;
+using Lykke.Service.ChainalysisMock.Core.Services;
+using Lykke.Service.ChainalysisMock.Models;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using TransactionStatus = System.Transactions.TransactionStatus;
 
 namespace Lykke.Service.ChainalysisMock.Controllers
 {
     [Route("api/receivedOutputManagement")]
     public class ReceivedOutputManagement : BaseController
     {
+
+        private readonly IChainalysisMockService _chainalysisMockService;
+
+        public ReceivedOutputManagement(IChainalysisMockService chainalysisMockService)
+        {
+            _chainalysisMockService = chainalysisMockService;
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -43,7 +56,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
 
         public async Task<ActionResult> GetOutputReceives(string userId, TransactionStatus? status, int? limit, int? offset)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.GetUserOutputsReceivedAsync(Token, userId, Mapper.Map<Core.Domain.TransactionStatus?>(status), limit, offset));
         }
 
         /// <summary>
@@ -81,7 +94,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(IReceiveOutputInfo), "Successful response")]
         public async Task<ActionResult> AddOutputReceives(string userId, [FromBody] OutputImportModel output)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.AddOutputReceivesAsync(Token, userId, Mapper.Map<OutputImport>(output)));
         }
 
         /// <summary>
@@ -100,7 +113,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerResponse(200, typeof(object), "Successful response")]
         public async Task<ActionResult> DeleteOutputReceive(string userId, string tx, string output)
         {
-            return Ok();
+            return Ok(await _chainalysisMockService.DeleteOutputReceiveAsync(Token, userId, tx, output));
         }
     }
 
