@@ -14,10 +14,10 @@ namespace Lykke.Service.ChainalysisMock.Client
             if (string.IsNullOrWhiteSpace(serviceUrl))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(serviceUrl));
 
-            builder.RegisterType<ChainalysisMockClient>()
-                .WithParameter("serviceUrl", serviceUrl)
-                .As<IChainalysisMockClient>()
-                .SingleInstance();
+            //builder.RegisterType<ChainalysisMockClient>()
+            //    .WithParameter("serviceUrl", serviceUrl)
+            //    .As<IChainalysisMockClient>()
+            //    .SingleInstance();
         }
 
         public static void RegisterChainalysisMockClient(this ContainerBuilder builder, ChainalysisMockServiceClientSettings settings, ILog log)
