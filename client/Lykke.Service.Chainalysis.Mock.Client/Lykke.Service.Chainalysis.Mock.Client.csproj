@@ -7,8 +7,8 @@
     <Company>Lykke</Company>
     <Product>Lykke.Service.Chainalysis_Mock</Product>
     <Description>Client for Lykke.Service.Chainalysis_Mock API</Description>
-    <PackageLicenseUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysis_Mock/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysis_Mock</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysis.Mock/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysi._Mock</PackageProjectUrl>
     <PackageIconUrl>https://avatars3.githubusercontent.com/u/14153330?v=3&amp;s=200</PackageIconUrl>
     <RepositoryUrl>https://github.com/LykkeCity/Lykke.Service.Chainalysis_Mock.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -26,7 +26,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Lykke.Common" Version="4.4.2" />
+    <PackageReference Include="Lykke.Service.Chainalysis.Mock.Contracts" Version="1.0.3" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.10" />
   </ItemGroup>
 

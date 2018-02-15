@@ -1,10 +1,9 @@
-﻿
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using Lykke.Service.ChainalysisMock.Client.AutorestClient.Models;
-using Lykke.Service.ChainalysisMock.Client.Models;
-using Microsoft.Rest;
+﻿using System.Threading.Tasks;
+using Lykke.Service.Chainalysis.Mock.Contracts;
+using AddressImportModel = Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.AddressImportModel;
+using CommentModel = Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.CommentModel;
+using OutputImportModel = Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.OutputImportModel;
+using UserImportModel = Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.UserImportModel;
 
 namespace Lykke.Service.ChainalysisMock.Client
 {
@@ -25,21 +24,21 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='offset'>
         /// The offset into the result set
         /// </param>
-        Task<UserDepositAddressInfoModel> UserByUserIdAddressesDepositGetWithHttpMessagesAsync(string userId, string token, int? limit = default(int?), int? offset = default(int?));
+        Task<UserDepositAddressInfoModel> GetAddressesDepositAsync(string userId, string token, int? limit = default(int?), int? offset = default(int?));
 
         /// <summary>
-        /// &lt;p&gt;Add a deposit address associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The user is automatically
-        /// created if it does not exist.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The function is idempotent: If
+        /// <p>Add a deposit address associated with a user.</p>
+        /// <p>
+        /// <strong>Note</strong>: The user is automatically
+        /// created if it does not exist.</p>
+        /// <p>
+        /// <strong>Note</strong>: The function is idempotent: If
         /// the deposit address is already associated with the user the
-        /// function succeeds.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: If the deposit address is
+        /// function succeeds.</p>
+        /// <p>
+        /// <strong>Note</strong>: If the deposit address is
         /// associated with a different user the function fails (see Response
-        /// Messages below).&lt;/p&gt;
+        /// Messages below).</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -50,7 +49,7 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdAddressesDepositPostWithHttpMessagesAsync(string userId, AddressImportModel depositeAddress, string token);
+        Task<object> AddAddressesDepositAsync(string userId, AddressImportModel depositeAddress, string token);
 
         /// <summary>
         /// Delete a deposit address associated with a user.
@@ -64,46 +63,46 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdAddressesDepositByAddressDeleteWithHttpMessagesAsync(string userId, string address, string token);
+        Task<object> DeleteAddressesDepositAsync(string userId, string address, string token);
 
        
         /// <summary>
-        /// &lt;p&gt;List received outputs associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;For each output the following is listed:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;output&lt;/code&gt;: the actual output&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;status&lt;/code&gt;: the status of the output.Can
-        /// be:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;unconfirmed&lt;/code&gt;: if the transaction has not
-        /// yet confirmed&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;confirmed&lt;/code&gt;: if the transaction has
-        /// confirmed, but not yet settled&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;settled&lt;/code&gt;: if the transaction has at least 5
-        /// confirmations.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Only settlet outputs take part
-        /// in risk score calculations&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Once an output has settled it
-        /// cannot be deleted.&lt;/p&gt;
+        /// <p>List received outputs associated with a user.</p>
+        /// <p>For each output the following is listed:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>output</code>: the actual output</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>status</code>: the status of the output.Can
+        /// be:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>unconfirmed</code>: if the transaction has not
+        /// yet confirmed</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>confirmed</code>: if the transaction has
+        /// confirmed, but not yet settled</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>settled</code>: if the transaction has at least 5
+        /// confirmations.</p>
+        /// </li>
+        /// </ul>
+        /// </li>
+        /// </ul>
+        /// <p>
+        /// <strong>Note:</strong> Only settlet outputs take part
+        /// in risk score calculations</p>
+        /// <p>
+        /// <strong>Note:</strong> Once an output has settled it
+        /// cannot be deleted.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -121,75 +120,75 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='offset'>
         /// The offset into the result set
         /// </param>
-        Task<UserTransactionInfoModel> UserByUserIdOutputsReceivedGetWithHttpMessagesAsync(string userId, string token, string status = default(string), int? limit = default(int?), int? offset = default(int?));
+        Task<UserTransactionInfoModel> GetOutputsReceivedAsync(string userId, string token, TransactionStatus? status = default(TransactionStatus?), int? limit = default(int?), int? offset = default(int?));
 
         /// <summary>
-        /// &lt;p&gt;Add a received output associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;Call this function to register that your service has
-        /// received a transaction output on behalf of a user.&lt;/p&gt;
-        /// &lt;p&gt;A transaction output can be specified in two
-        /// ways:&lt;/p&gt;
-        /// &lt;ol&gt;
-        /// &lt;li&gt;
-        /// &lt;strong&gt;Transaction hash with output index.&lt;/strong&gt;
+        /// <p>Add a received output associated with a user.</p>
+        /// <p>Call this function to register that your service has
+        /// received a transaction output on behalf of a user.</p>
+        /// <p>A transaction output can be specified in two
+        /// ways:</p>
+        /// <ol>
+        /// <li>
+        /// <strong>Transaction hash with output index.</strong>
         /// E.g.the second output of the transaction with the
-        /// hash&lt;code&gt;77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e&lt;/code&gt;
+        /// hash<code>77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e</code>
         /// has index 1 and is specified like this
-        /// &lt;code&gt;"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:1"&lt;/code&gt;&lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;strong&gt;Transaction hash with output address.&lt;/strong&gt;
+        /// <code>"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:1"</code></li>
+        /// <li>
+        /// <strong>Transaction hash with output address.</strong>
         /// E.g.the second output of the transaction with the
-        /// hash&lt;code&gt;77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e&lt;/code&gt;
+        /// hash<code>77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e</code>
         /// has output address
-        /// &lt;code&gt;19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z&lt;/code&gt; and is
+        /// <code>19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z</code> and is
         /// specified like this
-        /// &lt;code&gt;"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z"&lt;/code&gt;&lt;/li&gt;
-        /// &lt;/ol&gt;
-        /// &lt;p&gt;The first form is preferred because the second form is
+        /// <code>"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z"</code></li>
+        /// </ol>
+        /// <p>The first form is preferred because the second form is
         /// ambigious in cases where the transaction has more than one output
-        /// to the specified address.&lt;/p&gt;
-        /// &lt;p&gt;The return value contains a risk
-        /// &lt;code&gt;score&lt;/code&gt;, e.g. &lt;code&gt;red&lt;/code&gt;,
-        /// &lt;code&gt;amber&lt;/code&gt;, or&lt;code&gt;
-        /// green&lt;/code&gt;:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;red&lt;/code&gt;: This output was received directly
-        /// from a suspicious sender.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;amber&lt;/code&gt;: This output was received from an
-        /// unidentified sender.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;green&lt;/code&gt;: This output was received from an
-        /// identified non-suspicious sender. &lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;If the transaction has one or more confirmations and if
+        /// to the specified address.</p>
+        /// <p>The return value contains a risk
+        /// <code>score</code>, e.g. <code>red</code>,
+        /// <code>amber</code>, or<code>
+        /// green</code>:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>red</code>: This output was received directly
+        /// from a suspicious sender.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>amber</code>: This output was received from an
+        /// unidentified sender.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>green</code>: This output was received from an
+        /// identified non-suspicious sender. </p>
+        /// </li>
+        /// </ul>
+        /// <p>If the transaction has one or more confirmations and if
         /// the counterparty is identified the return value will
-        /// contain&lt;code&gt; name&lt;/code&gt; and&lt;code&gt;
-        /// category&lt;/code&gt; of the counterparty.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: If the transaction has not yet
-        /// confirmed&lt;code&gt; score&lt;/code&gt; will be
-        /// &lt;code&gt;amber&lt;/code&gt;.Therefore it is advised to call this
+        /// contain<code> name</code> and<code>
+        /// category</code> of the counterparty.</p>
+        /// <p>
+        /// <strong>Note</strong>: If the transaction has not yet
+        /// confirmed<code> score</code> will be
+        /// <code>amber</code>.Therefore it is advised to call this
         /// function twice, once your service observes the output, and once the
         /// transaction has confirmed, just before crediting the amount of the
-        /// output to the user.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The user is automatically
-        /// created if it does not exist.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The function is idempotent: If
+        /// output to the user.</p>
+        /// <p>
+        /// <strong>Note</strong>: The user is automatically
+        /// created if it does not exist.</p>
+        /// <p>
+        /// <strong>Note</strong>: The function is idempotent: If
         /// the sent output is already associated with the user the function
-        /// succeeds.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; If an output is not settled
-        /// within 7 days it is silently discarded.&lt;/p&gt;
+        /// succeeds.</p>
+        /// <p>
+        /// <strong>Note:</strong> If an output is not settled
+        /// within 7 days it is silently discarded.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -200,14 +199,14 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<ReceiveOutputInfoModel> UserByUserIdOutputsReceivedPostWithHttpMessagesAsync(string userId, OutputImportModel output, string token);
+        Task<ReceiveOutputInfoModel> AddOutputsReceivedAsync(string userId, OutputImportModel output, string token);
 
         /// <summary>
-        /// &lt;p&gt;Delete a received outputs associated with a
-        /// user.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Once an output has settled it
-        /// cannot be deleted.&lt;/p&gt;
+        /// <p>Delete a received outputs associated with a
+        /// user.</p>
+        /// <p>
+        /// <strong>Note:</strong> Once an output has settled it
+        /// cannot be deleted.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -221,45 +220,45 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdOutputsReceivedByTxByOutputDeleteWithHttpMessagesAsync(string userId, string tx, string output, string token);
+        Task<object> DeleteOutputsReceivedAsync(string userId, string tx, string output, string token);
 
         /// <summary>
-        /// &lt;p&gt;List sent outputs associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;For each output the following is listed:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;output&lt;/code&gt;: the actual output&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;status&lt;/code&gt;: the status of the output.Can
-        /// be:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;unconfirmed&lt;/code&gt;: if the transaction has not
-        /// yet confirmed&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;confirmed&lt;/code&gt;: if the transaction has
-        /// confirmed, but not yet settled&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;settled&lt;/code&gt;: if the transaction has at least 5
-        /// confirmations.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Only settlet outputs take part
-        /// in risk score calculations&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Once an output has settled it
-        /// cannot be deleted.&lt;/p&gt;
+        /// <p>List sent outputs associated with a user.</p>
+        /// <p>For each output the following is listed:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>output</code>: the actual output</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>status</code>: the status of the output.Can
+        /// be:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>unconfirmed</code>: if the transaction has not
+        /// yet confirmed</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>confirmed</code>: if the transaction has
+        /// confirmed, but not yet settled</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>settled</code>: if the transaction has at least 5
+        /// confirmations.</p>
+        /// </li>
+        /// </ul>
+        /// </li>
+        /// </ul>
+        /// <p>
+        /// <strong>Note:</strong> Only settlet outputs take part
+        /// in risk score calculations</p>
+        /// <p>
+        /// <strong>Note:</strong> Once an output has settled it
+        /// cannot be deleted.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -277,43 +276,43 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='offset'>
         /// The offset into the result set
         /// </param>
-        Task<UserTransactionInfoModel> UserByUserIdOutputsSentGetWithHttpMessagesAsync(string userId, string token, string status = default(string), int? limit = default(int?), int? offset = default(int?));
+        Task<UserTransactionInfoModel> GetOutputsSentAsync(string userId, string token, TransactionStatus? status = default(TransactionStatus?), int? limit = default(int?), int? offset = default(int?));
 
         /// <summary>
-        /// &lt;p&gt;Add a sent output associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;Call this function to register that your service has sent
-        /// a transaction output on behalf of a user.&lt;/p&gt;
-        /// &lt;p&gt;A transaction output can be specified in two
-        /// ways:&lt;/p&gt;
-        /// &lt;ol&gt;
-        /// &lt;li&gt;
-        /// &lt;strong&gt;Transaction hash with output index.&lt;/strong&gt;
+        /// <p>Add a sent output associated with a user.</p>
+        /// <p>Call this function to register that your service has sent
+        /// a transaction output on behalf of a user.</p>
+        /// <p>A transaction output can be specified in two
+        /// ways:</p>
+        /// <ol>
+        /// <li>
+        /// <strong>Transaction hash with output index.</strong>
         /// E.g.the second output of the transaction with the
-        /// hash&lt;code&gt;77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e&lt;/code&gt;
+        /// hash<code>77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e</code>
         /// has index 1 and is specified like this
-        /// &lt;code&gt;"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:1"&lt;/code&gt;&lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;strong&gt;Transaction hash with output address.&lt;/strong&gt;
+        /// <code>"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:1"</code></li>
+        /// <li>
+        /// <strong>Transaction hash with output address.</strong>
         /// E.g.the second output of the transaction with the
-        /// hash&lt;code&gt;77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e&lt;/code&gt;
+        /// hash<code>77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e</code>
         /// has output address
-        /// &lt;code&gt;19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z&lt;/code&gt; and is
+        /// <code>19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z</code> and is
         /// specified like this
-        /// &lt;code&gt;"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z"&lt;/code&gt;&lt;/li&gt;
-        /// &lt;/ol&gt;
-        /// &lt;p&gt;The first form is preferred because the second form is
+        /// <code>"77b8b931b3f7cd17e06dee680b77b28bb0809c88087343d657600730ca7ba15e:19eAxqvy3F3i2yNMWNjzwcKbSnMn9kpG1Z"</code></li>
+        /// </ol>
+        /// <p>The first form is preferred because the second form is
         /// ambigious in cases where the transaction has more than one output
-        /// to the specified address.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The user is automatically
-        /// created if it does not exist.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The function is idempotent: If
+        /// to the specified address.</p>
+        /// <p>
+        /// <strong>Note</strong>: The user is automatically
+        /// created if it does not exist.</p>
+        /// <p>
+        /// <strong>Note</strong>: The function is idempotent: If
         /// the sent output is already associated with the user the function
-        /// succeeds.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; If an output is not settled
-        /// within 7 days it is silently discarded.&lt;/p&gt;
+        /// succeeds.</p>
+        /// <p>
+        /// <strong>Note:</strong> If an output is not settled
+        /// within 7 days it is silently discarded.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -324,13 +323,13 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdOutputsSentPostWithHttpMessagesAsync(string userId, OutputImportModel output, string token);
+        Task<object> AddOutputsSentAsync(string userId, OutputImportModel output, string token);
 
         /// <summary>
-        /// &lt;p&gt;Delete a sent outputs associated with a user.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note:&lt;/strong&gt; Once an output has settled it
-        /// cannot be deleted.&lt;/p&gt;
+        /// <p>Delete a sent outputs associated with a user.</p>
+        /// <p>
+        /// <strong>Note:</strong> Once an output has settled it
+        /// cannot be deleted.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -344,42 +343,42 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdOutputsSentByTxByOutputDeleteWithHttpMessagesAsync(string userId, string tx, string output, string token);
+        Task<object> DeleteOutputsSentAsync(string userId, string tx, string output, string token);
 
         /// <summary>
-        /// &lt;p&gt;List users with optional filters.&lt;/p&gt;
-        /// &lt;p&gt;For each user the following is returned:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;userId&lt;/code&gt;: the ID of the user&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;score&lt;/code&gt;: the risk score of the user.E.g.
-        /// &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;amber&lt;/code&gt;,
-        /// or&lt;code&gt; green&lt;/code&gt;. Only included if the user has
-        /// sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;scoreUpdatedDate&lt;/code&gt;: the last time the risk
+        /// <p>List users with optional filters.</p>
+        /// <p>For each user the following is returned:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>userId</code>: the ID of the user</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>score</code>: the risk score of the user.E.g.
+        /// <code>red</code>, <code>amber</code>,
+        /// or<code> green</code>. Only included if the user has
+        /// sent or received value.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>scoreUpdatedDate</code>: the last time the risk
         /// score has been updated in POSIX format. Only included if the user
-        /// has sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;lastActivity&lt;/code&gt;: the last time the user sent
+        /// has sent or received value.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>lastActivity</code>: the last time the user sent
         /// or received value in POSIX format. Only included if the user has
-        /// sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;Hint: to only return users with score&lt;code&gt;
-        /// red&lt;/code&gt; set the &lt;code&gt;score&lt;/code&gt; parameter
-        /// to&lt;code&gt; red&lt;/code&gt;&lt;/p&gt;
-        /// &lt;p&gt;Hint: To only return users that have sent or received
-        /// value over the last 2 weeks set the&lt;code&gt;
-        /// maxIdleDays&lt;/code&gt; parameter to 14&lt;/p&gt;
+        /// sent or received value.</p>
+        /// </li>
+        /// </ul>
+        /// <p>Hint: to only return users with score<code>
+        /// red</code> set the <code>score</code> parameter
+        /// to<code> red</code></p>
+        /// <p>Hint: To only return users that have sent or received
+        /// value over the last 2 weeks set the<code>
+        /// maxIdleDays</code> parameter to 14</p>
         /// </summary>
         /// <param name='token'>
         /// API-key
@@ -398,169 +397,169 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='offset'>
         /// The offset into the result set
         /// </param>
-        Task<UserInfoModel> UserGetWithHttpMessagesAsync(string token, int? maxIdleDays = default(int?), string score = default(string), int? limit = default(int?), int? offset = default(int?));
+        Task<UserInfoModel> GetUsersAsync(string token, int? maxIdleDays = default(int?), RiskScore? score = default(RiskScore?), int? limit = default(int?), int? offset = default(int?));
 
         /// <summary>
-        /// &lt;p&gt;Import a user with sent and received history.&lt;/p&gt;
-        /// &lt;p&gt;With this function you can import a whole user with sent
+        /// <p>Import a user with sent and received history.</p>
+        /// <p>With this function you can import a whole user with sent
         /// and received output history and all deposit and withdrawal
-        /// addresses.&lt;/p&gt;
-        /// &lt;p&gt;The import format is as follows:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;userId&lt;/code&gt;: the unique ID of the user. The
+        /// addresses.</p>
+        /// <p>The import format is as follows:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>userId</code>: the unique ID of the user. The
         /// caller decides the user ID and can specify any value containing the
         /// folllowing characters '-' '_' 'a-z' 'A-Z' '0-9' with a maximum of
-        /// 200 characters.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;depositAddresses&lt;/code&gt;: The deposit addresses of
+        /// 200 characters.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>depositAddresses</code>: The deposit addresses of
         /// the user. Specified as an array of strings where each address must
-        /// be a valid Bitcoin addresses.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;withdrawalAddresses&lt;/code&gt;: The withdrawal
+        /// be a valid Bitcoin addresses.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>withdrawalAddresses</code>: The withdrawal
         /// addresses of the user. Specified as an array of strings where each
-        /// address must be a valid Bitcoin addresses.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;sentOutputs&lt;/code&gt;: The transaction outputs sent
+        /// address must be a valid Bitcoin addresses.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>sentOutputs</code>: The transaction outputs sent
         /// by the user.See below for a specification on how to format an
-        /// output.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;receivedOutputs&lt;/code&gt;: The transaction outputs
+        /// output.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>receivedOutputs</code>: The transaction outputs
         /// received by the user.See below for a specification on how to format
-        /// an output.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;Sent or received outputs can be specified in two
-        /// ways:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;A transaction hash followed by the index of the output
+        /// an output.</p>
+        /// </li>
+        /// </ul>
+        /// <p>Sent or received outputs can be specified in two
+        /// ways:</p>
+        /// <ul>
+        /// <li>
+        /// <p>A transaction hash followed by the index of the output
         /// counting from zero:
-        /// &lt;code&gt;tx-hash:output-index&lt;/code&gt;.Exmaple: The first
-        /// output of of the transaction&lt;code&gt;
-        /// d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e&lt;/code&gt;
+        /// <code>tx-hash:output-index</code>.Exmaple: The first
+        /// output of of the transaction<code>
+        /// d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e</code>
         /// is specified like this
-        /// &lt;code&gt;"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:0"&lt;/code&gt;
+        /// <code>"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:0"</code>
         /// and the second output like this
-        /// &lt;code&gt;"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:1"&lt;/code&gt;&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;A transaction hash followed by the address of the output:
-        /// &lt;code&gt;tx-hash:output-address&lt;/code&gt;.Exmaple: The first
-        /// output of of the transaction&lt;code&gt;
-        /// d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e&lt;/code&gt;
+        /// <code>"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:1"</code></p>
+        /// </li>
+        /// <li>
+        /// <p>A transaction hash followed by the address of the output:
+        /// <code>tx-hash:output-address</code>.Exmaple: The first
+        /// output of of the transaction<code>
+        /// d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e</code>
         /// is specified like this
-        /// &lt;code&gt;"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:1ERWgzFdPwbAYM6GWg9dUX1Q3KssatXgYz"&lt;/code&gt;
+        /// <code>"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:1ERWgzFdPwbAYM6GWg9dUX1Q3KssatXgYz"</code>
         /// and the second output like this
-        /// &lt;code&gt;"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:16F5EJE8mgiEDJzKqRdWUzdB54WceDRfjx"&lt;/code&gt;&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: The second output format can be
+        /// <code>"d03104f31dfbea2fa0e9c871790fbd1864d5b43354612c5b0b725eeb73bb7b8e:16F5EJE8mgiEDJzKqRdWUzdB54WceDRfjx"</code></p>
+        /// </li>
+        /// </ul>
+        /// <p>
+        /// <strong>Note</strong>: The second output format can be
         /// ambigious in cases where the output address appears more than once
         /// in the outputs of a single transaction. If this occurs the first
-        /// matching output is selected.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: Importing a user with sent or
+        /// matching output is selected.</p>
+        /// <p>
+        /// <strong>Note</strong>: Importing a user with sent or
         /// received outputs with less than 5 confirmations will
-        /// fail.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: Subsequent import calls with the
+        /// fail.</p>
+        /// <p>
+        /// <strong>Note</strong>: Subsequent import calls with the
         /// same userId are incremental, meaning that you can import another
         /// (E.g. new) version of a user on top of what is registered for that
         /// user already.In other words, any existing outputs or addresses
-        /// which are not in the new import will NOT get deleted.&lt;/p&gt;
-        /// &lt;p&gt;
-        /// &lt;strong&gt;Note&lt;/strong&gt;: If one of the deposit addresses
+        /// which are not in the new import will NOT get deleted.</p>
+        /// <p>
+        /// <strong>Note</strong>: If one of the deposit addresses
         /// are associated with a different user the function fails(see
-        /// Response Messages below).&lt;/p&gt;
+        /// Response Messages below).</p>
         /// </summary>
         /// <param name='userImport'>
         /// </param>
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<string> UserImportPostWithHttpMessagesAsync(UserImportModel userImport, string token);
+        Task<string> ImportUserAsync(UserImportModel userImport, string token);
 
         /// <summary>
-        /// &lt;p&gt;Get information about a user.&lt;/p&gt;
-        /// &lt;p&gt;The follwing information is returned:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;userId&lt;/code&gt;: the ID of the user&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;creationDate&lt;/code&gt;: the POSIX time when the user
-        /// was created&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;comment&lt;/code&gt;: an arbitrary string that can be
-        /// set using another API function.Only included if set.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;score&lt;/code&gt;: the risk score of the user. E.g.
-        /// &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;amber&lt;/code&gt;,
-        /// or&lt;code&gt; green&lt;/code&gt;. Only included if the user has
-        /// sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;scoreUpdatedDate&lt;/code&gt;: the last time the risk
+        /// <p>Get information about a user.</p>
+        /// <p>The follwing information is returned:</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>userId</code>: the ID of the user</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>creationDate</code>: the POSIX time when the user
+        /// was created</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>comment</code>: an arbitrary string that can be
+        /// set using another API function.Only included if set.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>score</code>: the risk score of the user. E.g.
+        /// <code>red</code>, <code>amber</code>,
+        /// or<code> green</code>. Only included if the user has
+        /// sent or received value.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>scoreUpdatedDate</code>: the last time the risk
         /// score has been updated in POSIX format. Only included if the user
-        /// has sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;lastActivity&lt;/code&gt;: the last time the user sent
+        /// has sent or received value.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>lastActivity</code>: the last time the user sent
         /// or received value in POSIX format. Only included if the user has
-        /// sent or received value.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;exposureDetails&lt;/code&gt;: detailed exposure
+        /// sent or received value.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>exposureDetails</code>: detailed exposure
         /// data.Only included if the user has sent or received
-        /// value.&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;category&lt;/code&gt;: exposure category.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;sentIndirectExposure&lt;/code&gt;: funds sent
-        /// indirectly.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;sentDirectExposure&lt;/code&gt;: funds sent
-        /// directly.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;receivedIndirectExposure&lt;/code&gt;: funds received
-        /// indirectly.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;
-        /// &lt;code&gt;receivedDirectExposure&lt;/code&gt;: funds received
-        /// directly.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
+        /// value.</p>
+        /// <ul>
+        /// <li>
+        /// <p>
+        /// <code>category</code>: exposure category.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>sentIndirectExposure</code>: funds sent
+        /// indirectly.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>sentDirectExposure</code>: funds sent
+        /// directly.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>receivedIndirectExposure</code>: funds received
+        /// indirectly.</p>
+        /// </li>
+        /// <li>
+        /// <p>
+        /// <code>receivedDirectExposure</code>: funds received
+        /// directly.</p>
+        /// </li>
+        /// </ul>
+        /// </li>
+        /// </ul>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -568,14 +567,14 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<UserDetailsModel> UserByUserIdGetWithHttpMessagesAsync(string userId, string token);
+        Task<UserDetailsModel> GetUserAsync(string userId, string token);
 
         /// <summary>
-        /// &lt;p&gt;Set the &lt;code&gt;comment&lt;/code&gt; string on a
-        /// user.&lt;/p&gt;
-        /// &lt;p&gt;This is a convenience function that allows you to set an
+        /// <p>Set the <code>comment</code> string on a
+        /// user.</p>
+        /// <p>This is a convenience function that allows you to set an
         /// arbitrary string for a user.When retrieving a user the string is
-        /// returned.&lt;/p&gt;
+        /// returned.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -586,26 +585,26 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdCommentPostWithHttpMessagesAsync(string userId, CommentModel comment, string token);
+        Task<object> UpdateUserCommentAsync(string userId, CommentModel comment, string token);
 
         /// <summary>
-        /// &lt;p&gt;List withdrawal addresses associated with a
-        /// user.&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;Each withdrawal address is given a risk&lt;code&gt;
-        /// score&lt;/code&gt;. E.g. &lt;code&gt;red&lt;/code&gt;,
-        /// &lt;code&gt;amber&lt;/code&gt;, or&lt;code&gt;
-        /// green&lt;/code&gt;.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;If a withdrawal address belongs to a known service,
-        /// then&lt;code&gt; name&lt;/code&gt; and&lt;code&gt;
-        /// category&lt;/code&gt; will be included and gives the name and
-        /// category of that service. Otherwise&lt;code&gt; name&lt;/code&gt;
-        /// and&lt;code&gt; category&lt;/code&gt; will be omitted.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
+        /// <p>List withdrawal addresses associated with a
+        /// user.</p>
+        /// <ul>
+        /// <li>
+        /// <p>Each withdrawal address is given a risk<code>
+        /// score</code>. E.g. <code>red</code>,
+        /// <code>amber</code>, or<code>
+        /// green</code>.</p>
+        /// </li>
+        /// <li>
+        /// <p>If a withdrawal address belongs to a known service,
+        /// then<code> name</code> and<code>
+        /// category</code> will be included and gives the name and
+        /// category of that service. Otherwise<code> name</code>
+        /// and<code> category</code> will be omitted.</p>
+        /// </li>
+        /// </ul>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -619,39 +618,39 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='offset'>
         /// The offset into the result set
         /// </param>
-        Task<UserWithdrawAddressInfoModel> UserByUserIdAddressesWithdrawalGetWithHttpMessagesAsync(string userId, string token, int? limit = default(int?), int? offset = default(int?));
+        Task<UserWithdrawAddressInfoModel> GetAddressesWithdrawalAsync(string userId, string token, int? limit = default(int?), int? offset = default(int?));
 
         /// <summary>
-        /// &lt;p&gt;Add a withdrawal address associated with a user.&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;The user is automatically created if it does not
-        /// exist.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;The function is idempotent: If the withdrawal address is
-        /// already associated with the user the function succeeds.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;The function returns an analysis of the withdrawal
-        /// address:&lt;/p&gt;
-        /// &lt;ul&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;A risk &lt;code&gt;score&lt;/code&gt;.E.g.
-        /// &lt;code&gt;red&lt;/code&gt;, &lt;code&gt;amber&lt;/code&gt;,
-        /// or&lt;code&gt; green&lt;/code&gt;.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;li&gt;
-        /// &lt;p&gt;If a withdrawal address belongs to a known service,
-        /// then&lt;code&gt; name&lt;/code&gt; and&lt;code&gt;
-        /// category&lt;/code&gt; will be included and gives the name and
-        /// category of that service. Otherwise&lt;code&gt; name&lt;/code&gt;
-        /// and&lt;code&gt; category&lt;/code&gt; will be omitted.&lt;/p&gt;
-        /// &lt;/li&gt;
-        /// &lt;/ul&gt;
-        /// &lt;p&gt;Hint: This function could be called both when a user
+        /// <p>Add a withdrawal address associated with a user.</p>
+        /// <ul>
+        /// <li>
+        /// <p>The user is automatically created if it does not
+        /// exist.</p>
+        /// </li>
+        /// <li>
+        /// <p>The function is idempotent: If the withdrawal address is
+        /// already associated with the user the function succeeds.</p>
+        /// </li>
+        /// </ul>
+        /// <p>The function returns an analysis of the withdrawal
+        /// address:</p>
+        /// <ul>
+        /// <li>
+        /// <p>A risk <code>score</code>.E.g.
+        /// <code>red</code>, <code>amber</code>,
+        /// or<code> green</code>.</p>
+        /// </li>
+        /// <li>
+        /// <p>If a withdrawal address belongs to a known service,
+        /// then<code> name</code> and<code>
+        /// category</code> will be included and gives the name and
+        /// category of that service. Otherwise<code> name</code>
+        /// and<code> category</code> will be omitted.</p>
+        /// </li>
+        /// </ul>
+        /// <p>Hint: This function could be called both when a user
         /// pastes in the withdrawal address for the first time, and also
-        /// before each subsequent withdrawal.&lt;/p&gt;
+        /// before each subsequent withdrawal.</p>
         /// </summary>
         /// <param name='userId'>
         /// The ID of the user
@@ -662,7 +661,7 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<WithdrawAddressInfoModel> UserByUserIdAddressesWithdrawalPostWithHttpMessagesAsync(string userId, AddressImportModel withdrawalAddress, string token);
+        Task<WithdrawAddressInfoModel> AddAddressesWithdrawalAsync(string userId, AddressImportModel withdrawalAddress, string token);
 
         /// <summary>
         /// Delete a withdrawal address associated with a user.
@@ -676,6 +675,6 @@ namespace Lykke.Service.ChainalysisMock.Client
         /// <param name='token'>
         /// API-key
         /// </param>
-        Task<object> UserByUserIdAddressesWithdrawalByAddressDeleteWithHttpMessagesAsync(string userId, string address, string token);
+        Task<object> DeleteAddressesWithdrawalAsync(string userId, string address, string token);
     }
 }
