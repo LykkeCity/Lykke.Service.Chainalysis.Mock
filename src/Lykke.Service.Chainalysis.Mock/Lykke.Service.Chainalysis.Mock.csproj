@@ -48,7 +48,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\Lykke.Service.Chainalysis.Mock.Contracts\Lykke.Service.Chainalysis.Mock.Contracts.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.AzureRepositories\Lykke.Service.Chainalysis.Mock.AzureRepositories.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Core\Lykke.Service.Chainalysis.Mock.Core.csproj" />
     <ProjectReference Include="..\Lykke.Service.Chainalysis.Mock.Services\Lykke.Service.Chainalysis.Mock.Services.csproj" />
