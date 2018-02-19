@@ -33,8 +33,7 @@ namespace Lykke.Service.ChainalysisMock.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            LoadRepositories(builder);
-            LoadServices(builder);
+          
 
             builder.RegisterInstance(_log)
                 .As<ILog>()
@@ -50,14 +49,15 @@ namespace Lykke.Service.ChainalysisMock.Modules
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
 
-            // TODO: Add your dependencies here
+            LoadRepositories(builder);
 
-           
+            LoadServices(builder);
+
 
             builder.Populate(_services);
         }
 
-        private void LoadServices(ContainerBuilder builder)
+        private void LoadRepositories(ContainerBuilder builder)
         {
             var addressRepository = new ChainalysisMockUserAddressRepository(
                 AzureTableStorage<MockUserAddress>.Create(_dbSettings.ConnectionString(x => x.DataConnString),
@@ -77,11 +77,12 @@ namespace Lykke.Service.ChainalysisMock.Modules
             builder.RegisterInstance<IChainalysisMockUserRepository>(userRepository);
         }
 
-        private void LoadRepositories(ContainerBuilder builder)
+        private void LoadServices(ContainerBuilder builder)
         {
 
-            builder.RegisterType<HealthService>()
-                .As<IHealthService>()
+
+            builder.RegisterType<ChainalysisMockService>()
+                .As<IChainalysisMockService>()
                 .SingleInstance();
 
         }
