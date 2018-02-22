@@ -4,13 +4,17 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using AzureStorage.Tables;
 using Common.Log;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
+using Lykke.Service.Chainalysis.Mock.Contracts;
+using Lykke.Service.ChainalysisMock.Core.Domain;
 using Lykke.Service.ChainalysisMock.Core.Services;
 using Lykke.Service.ChainalysisMock.Core.Settings;
+using Lykke.Service.ChainalysisMock.Models;
 using Lykke.Service.ChainalysisMock.Modules;
 using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
@@ -86,6 +90,27 @@ namespace Lykke.Service.ChainalysisMock
         {
             try
             {
+                Mapper.Initialize(cfg =>
+                {
+                    cfg.CreateMap<AddressImportModel, AddressImport>();
+                    cfg.CreateMap< Chainalysis.Mock.Contracts.TransactionStatus ? , Core.Domain.TransactionStatus?>();
+                    cfg.CreateMap<OutputImportModel, OutputImport>();
+                    cfg.CreateMap<Chainalysis.Mock.Contracts.RiskScore?, Core.Domain.RiskScore?>();
+                    cfg.CreateMap<UserImportModel, UserImport>();
+                    cfg.CreateMap<CommentModel, UserComment>();
+
+                    cfg.CreateMap<IUserDepositAddressInfo, UserDepositAddressInfoModel > ();
+                    cfg.CreateMap<IUserTransactionInfo, UserTransactionInfoModel > ();
+                    cfg.CreateMap<IReceiveOutputInfo, ReceiveOutputInfoModel > ();
+                    cfg.CreateMap<IUserInfo, UserInfoModel > ();
+                    cfg.CreateMap<IUserDetails, UserDetailsModel > ();
+                    cfg.CreateMap<IUserWithdrawAddressInfo, UserWithdrawAddressInfoModel > ();
+                    cfg.CreateMap<IWithdrawAddressInfo, WithdrawAddressInfoModel > ();
+
+
+
+                });
+
                 if (env.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();

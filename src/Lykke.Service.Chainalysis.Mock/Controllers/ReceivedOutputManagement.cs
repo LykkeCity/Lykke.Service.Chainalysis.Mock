@@ -54,7 +54,7 @@ namespace Lykke.Service.ChainalysisMock.Controllers
         [SwaggerOperation(Tags = new[] { "Received Output Management" })]
         [SwaggerResponse(200, typeof(IUserTransactionInfo), "Successful response")]
 
-        public async Task<ActionResult> GetOutputReceives(string userId, TransactionStatus? status, int? limit, int? offset)
+        public async Task<ActionResult> GetOutputReceives(string userId, Chainalysis.Mock.Contracts.TransactionStatus? status, int? limit, int? offset)
         {
             return Ok(await _chainalysisMockService.GetUserOutputsReceivedAsync(Token, userId, Mapper.Map<Core.Domain.TransactionStatus?>(status), limit, offset));
         }
