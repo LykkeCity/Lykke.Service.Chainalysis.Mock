@@ -17,8 +17,8 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Tables
 
         public string UserId
         {
-            get => PartitionKey;
-            set => PartitionKey = value;
+            get => RowKey;
+            set => RowKey = value;
         }
         public int LastActivity { get; set; }
         public string Score { get; set; }
