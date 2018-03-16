@@ -100,6 +100,7 @@ namespace Lykke.Service.ChainalysisMock.Services
 
         public async Task<IAddressInfo> AddAddressDepositsAsync(string token, string userId, IAddressImport addressImport)
         {
+            await CreateUserIfNotExists(token, userId);
             await _chainalysisMockUserAddressRepository.AddAddressAsync(token, userId, addressImport, true);
             return new AddressInfo
             {
@@ -131,6 +132,7 @@ namespace Lykke.Service.ChainalysisMock.Services
 
         public async Task<IWithdrawAddressInfo> AddAddressWithdrawAsync(string token, string userId, IAddressImport addressImport)
         {
+            await CreateUserIfNotExists(token, userId);
             await _chainalysisMockUserAddressRepository.AddAddressAsync(token, userId, addressImport, false);
             return new WithdrawAddressInfo
             {
@@ -169,6 +171,7 @@ namespace Lykke.Service.ChainalysisMock.Services
 
         public async Task<object> AddOutputSendsAsync(string token, string userId, IOutputImport outputImport)
         {
+            await CreateUserIfNotExists(token, userId);
             await _chainalysisMockUserTransfersRepository.AddOutputAsync(token, userId, outputImport, false);
             return new object();
         }
@@ -201,6 +204,7 @@ namespace Lykke.Service.ChainalysisMock.Services
 
         public async Task<IReceiveOutputInfo> AddOutputReceivesAsync(string token, string userId, IOutputImport outputs)
         {
+            await CreateUserIfNotExists(token, userId);
             await _chainalysisMockUserTransfersRepository.AddOutputAsync(token, userId, outputs, true);
             return new ReceiveOutputInfo
             {
@@ -214,6 +218,18 @@ namespace Lykke.Service.ChainalysisMock.Services
         {
             await _chainalysisMockUserTransfersRepository.DeleteOutputSendAsync(token, userId, $"{tx}:{output}", false);
             return new object();
+        }
+
+        private async Task CreateUserIfNotExists(string token, string userId)
+        {
+            var users = await _chainalysisMockUserRepository.GetUsersAsync(token);
+            if (users.Data.All(u=>!u.UserId.Equals(userId)))
+            {
+                await _chainalysisMockUserRepository.UpdateUserAsync(token, new UserImport
+                {
+                    UserId = userId
+                });
+            }
         }
     }
 }
