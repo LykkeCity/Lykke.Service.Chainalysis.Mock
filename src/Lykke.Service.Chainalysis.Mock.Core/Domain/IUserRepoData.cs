@@ -2,6 +2,6 @@
 {
     public interface IUserRepoData : IUserData
     {
-        int CreatedDate { get; set; }
+        long CreatedDate { get; set; }
     }
 }

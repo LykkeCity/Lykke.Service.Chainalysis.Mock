@@ -34,7 +34,7 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Tables
             set => RowKey = value;
         }
 
-        public int IsDeposit { get; set; }
+        public long IsDeposit { get; set; }
 
         public string Name { get; set; }
 

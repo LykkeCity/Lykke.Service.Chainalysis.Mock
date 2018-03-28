@@ -5,11 +5,11 @@ namespace Lykke.Service.ChainalysisMock.Core.Domain
     public interface IUserDetails
     {
         string UserId { get; set; }
-        int CreationDate { get; set; }
+        long CreationDate { get; set; }
         string Comment { get; set; }
-        int LastActivity { get; set; }
+        long LastActivity { get; set; }
         string Score { get; set; }
-        int ScoreUpdatedDate { get; set; }
+        long ScoreUpdatedDate { get; set; }
         List<IUserExplosureDetails> ExposureDetails { get; set; }
 
     }

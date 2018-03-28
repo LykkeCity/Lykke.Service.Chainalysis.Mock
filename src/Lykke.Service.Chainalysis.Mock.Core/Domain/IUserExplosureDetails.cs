@@ -4,9 +4,9 @@
     {
         string Category { get; set; }
 
-        int SentIndirectExposure { get; set; }
-        int SentDirectExposure { get; set; }
-        int ReceivedIndirectExposure { get; set; }
-        int ReceivedDirectExposure { get; set; }
+        long SentIndirectExposure { get; set; }
+        long SentDirectExposure { get; set; }
+        long ReceivedIndirectExposure { get; set; }
+        long ReceivedDirectExposure { get; set; }
     }
 }

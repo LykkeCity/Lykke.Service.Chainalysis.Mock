@@ -20,9 +20,9 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Tables
             get => RowKey;
             set => RowKey = value;
         }
-        public int LastActivity { get; set; }
+        public long LastActivity { get; set; }
         public string Score { get; set; }
-        public int ScoreUpdatedDate { get; set; }
-        public int CreatedDate { get; set; }
+        public long ScoreUpdatedDate { get; set; }
+        public long CreatedDate { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Tables
             set => RowKey = value;
         }
 
-        public int IsReceive { get; set; }
+        public long IsReceive { get; set; }
         public string Status { get; set; }
     }
 }

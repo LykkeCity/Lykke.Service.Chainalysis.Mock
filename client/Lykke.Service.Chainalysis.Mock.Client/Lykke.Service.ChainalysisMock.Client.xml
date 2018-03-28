@@ -3499,7 +3499,7 @@
             Initializes a new instance of the IUserData class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserData.#ctor(System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserData.#ctor(System.Int64,System.Int64,System.String,System.String)">
             <summary>
             Initializes a new instance of the IUserData class.
             </summary>
@@ -3559,7 +3559,7 @@
             Initializes a new instance of the IUserDetails class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserDetails.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String,System.String,System.Collections.Generic.IList{Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserExplosureDetails})">
+        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserDetails.#ctor(System.Int64,System.Int64,System.Int64,System.String,System.String,System.String,System.Collections.Generic.IList{Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserExplosureDetails})">
             <summary>
             Initializes a new instance of the IUserDetails class.
             </summary>
@@ -3605,7 +3605,7 @@
             Initializes a new instance of the IUserExplosureDetails class.
             </summary>
         </member>
-        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserExplosureDetails.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.String)">
+        <member name="M:Lykke.Service.ChainalysisMock.Client.AutorestClient.Models.IUserExplosureDetails.#ctor(System.Int64,System.Int64,System.Int64,System.Int64,System.String)">
             <summary>
             Initializes a new instance of the IUserExplosureDetails class.
             </summary>

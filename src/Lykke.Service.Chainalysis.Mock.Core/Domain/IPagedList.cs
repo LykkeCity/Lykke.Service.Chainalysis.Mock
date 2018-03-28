@@ -4,9 +4,9 @@ namespace Lykke.Service.ChainalysisMock.Core.Domain
 {
     public interface IPagedList<T>
     {
-        int Total { get; set; }
-        int Limit { get; set; }
-        int Offset { get; set; }
+        long Total { get; set; }
+        long Limit { get; set; }
+        long Offset { get; set; }
         List<T> Data { get; set; }
     }
 }

@@ -3,9 +3,9 @@
     public interface IUserData
     {
         string UserId { get; set; }
-        int LastActivity { get; set; }
+        long LastActivity { get; set; }
         string Score { get; set; }
-        int ScoreUpdatedDate { get; set; }
+        long ScoreUpdatedDate { get; set; }
 
     }
 }
