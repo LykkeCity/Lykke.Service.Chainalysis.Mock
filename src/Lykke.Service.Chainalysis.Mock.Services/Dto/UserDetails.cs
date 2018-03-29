@@ -9,7 +9,9 @@ namespace Lykke.Service.ChainalysisMock.Services.Dto
     {
         public UserDetails()
         {
-            ExposureDetails = new List<IUserExplosureDetails> {new UserExplosureDetails()};
+            ExposureDetails = new List<IUserExplosureDetails> {new UserExplosureDetails{
+                    SentIndirectExposure = long.MaxValue
+                }};
         }
         public string UserId { get; set; }
         public long CreationDate { get; set; }
