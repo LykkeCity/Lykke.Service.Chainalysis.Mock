@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AzureStorage;
 using Lykke.Service.ChainalysisMock.AzureRepositories.Dto;
@@ -21,15 +22,17 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Repositories
             _addressRepo = addressRepo;
             _transfersRepo = transfersRepo;
         }
+        private readonly static DateTime StartDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         public async Task<IUserRepoInfo> GetUsersAsync(string token)
         {
+            
             var users = await _repository.GetDataAsync(token);
             return new UserRepoInfo(from user in users
                                     select new UserRepoData
                                     {
                                        UserId = user.UserId,
                                        Score = user.Score,
-                                       CreatedDate = user.CreatedDate,
+                                       CreatedDate = (long)(DateTime.UtcNow - StartDate).TotalSeconds,
                                        LastActivity = user.LastActivity,
                                        ScoreUpdatedDate = user.ScoreUpdatedDate
                                     });
