@@ -32,7 +32,7 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Repositories
                                     {
                                        UserId = user.UserId,
                                        Score = user.Score,
-                                       CreatedDate = (long)(DateTime.UtcNow - StartDate).TotalSeconds,
+                                       CreatedDate = user.CreatedDate,
                                        LastActivity = user.LastActivity,
                                        ScoreUpdatedDate = user.ScoreUpdatedDate
                                     });
@@ -45,10 +45,10 @@ namespace Lykke.Service.ChainalysisMock.AzureRepositories.Repositories
             {
                 Token = token,
                 UserId = userImport.UserId,
-                LastActivity = 0,
+                LastActivity = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds,
                 Score = "green",
-                ScoreUpdatedDate = 0,
-                CreatedDate = 0
+                ScoreUpdatedDate = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds,
+                CreatedDate = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds
             });
 
             if (userImport.DepositAddresses != null)
