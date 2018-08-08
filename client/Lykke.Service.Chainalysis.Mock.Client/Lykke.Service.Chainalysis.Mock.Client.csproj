@@ -27,9 +27,9 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
-    <PackageReference Include="Lykke.Common" Version="6.1.0" />
     <PackageReference Include="Lykke.Service.Chainalysis.Mock.Contracts" Version="1.0.4" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.11" />
+    <PackageReference Include="Lykke.Common" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
